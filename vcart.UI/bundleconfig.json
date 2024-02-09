@@ -1,0 +1,9 @@
+[
+  {
+    "outputFileName": "wwwroot/js/bundle.js",
+    "inputFiles": [
+      "wwwroot/js/cart.js",
+      "wwwroot/js/site.js"
+    ]
+  }
+]

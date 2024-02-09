@@ -1,0 +1,51 @@
+﻿@model IEnumerable<vcart.Models.ItemModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="background:orange;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 text-white" style="width:100%">
+                <div class="pt-5 pb-5">
+                    <h1>V Cart's Online Ordering</h1>
+                    <p class="pb-4">
+                        Product delivered fast at your door step!
+                    </p>
+                    <p>
+                        <a href="#heading" class="btn btn-success">ORDER ONLINE NOW</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4 pt-4">
+                <img src="~/images/product-header.png" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("ProductMenu")
+
+@*<div class="row mt-5">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 mb-3">
+            <div class="card">
+                <img src="@item.ImageUrl" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    <a href="javascript:void(0)" onclick="AddToCart('@item.Id', '@item.Name', '@item.UnitPrice', 1)" class="btn btn-primary">Add To Cart</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="toast" id="toastCart">
+    <div class="toast-header">
+        <strong class="me-auto">Notification</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body"></div>
+</div>*@
