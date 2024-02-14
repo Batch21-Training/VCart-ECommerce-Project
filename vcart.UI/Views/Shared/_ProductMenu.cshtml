@@ -1,4 +1,10 @@
-﻿<div class="container pb-4">
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+
+@model IPagedList<vcart.Models.ItemModel>
+
+<div class="container pb-4">
     <div class="row pt-4">
         <h2 class="col-sm-12 mb-4" id="heading">All Products</h2>
     </div>
@@ -22,7 +28,11 @@
             </div>
         }
     </div>
+
 </div>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new {page}), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded})
+
 
 @*<div class="toast fade hide" data-autohide="false" id="toastCart">
     <div class="toast-header">

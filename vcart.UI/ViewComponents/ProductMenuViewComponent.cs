@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using vcart.Services.Interfaces;
+using X.PagedList;
 
 namespace vcart.UI.ViewComponents
 {
@@ -11,9 +12,10 @@ namespace vcart.UI.ViewComponents
             _itemService = itemService;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(IPagedList productItems)
         {
-            var items = _itemService.GetItems();
+            //var items = _itemService.GetItems().ToList();
+            var items = productItems;
             return View("~/Views/Shared/_ProductMenu.cshtml", items);
         }
     }
