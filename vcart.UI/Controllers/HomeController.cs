@@ -4,6 +4,7 @@ using vcart.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
+using X.PagedList;
 
 namespace vcart.UI.Controllers
 {
@@ -20,11 +21,11 @@ namespace vcart.UI.Controllers
             _cache = cache;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
             //var items = _itemService.GetItems();
             //key
-
+            var pageNumber = page ?? 1;
             string key = "catalog";
             // _cache.Remove(key); // uncomment only if debug the flow
             var items = _cache.GetOrCreate(key, entry =>
@@ -44,7 +45,7 @@ namespace vcart.UI.Controllers
             //{
             //    _logger.LogError(ex, ex.Message);
             //}
-            return View(items);
+            return View(items.ToPagedList(pageNumber,8));
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,8 @@
-﻿@model IEnumerable<vcart.Models.ItemModel>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+
+@model IPagedList<vcart.Models.ItemModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -24,7 +28,7 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("ProductMenu")
+@await Component.InvokeAsync("ProductMenu",new { productItems = Model})
 
 @*<div class="row mt-5">
     @foreach (var item in Model)
