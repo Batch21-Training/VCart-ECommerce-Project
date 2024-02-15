@@ -4,6 +4,8 @@ using vcart.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
+using X.PagedList;
+using X.PagedList.Mvc.Core;
 
 namespace vcart.UI.Controllers
 {
@@ -20,32 +22,32 @@ namespace vcart.UI.Controllers
             _cache = cache;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            //var items = _itemService.GetItems();
-            //key
-
-            string key = "catalog";
-            // _cache.Remove(key); // uncomment only if debug the flow
-            var items = _cache.GetOrCreate(key, entry =>
+            try
             {
-                entry.AbsoluteExpiration = DateTime.Now.AddHours(12);
-                entry.SlidingExpiration = TimeSpan.FromMinutes(15);
-                return _itemService.GetItems();
-            });
+                string key = "catalog";
+                int pageSize = 10;
+                int pageNumber = page ?? 1;
 
+                var cachedItems = _cache.GetOrCreate(key, entry =>
+                {
+                    entry.AbsoluteExpiration = DateTime.Now.AddHours(12);
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(15);
+                    return _itemService.GetItems().ToList(); 
+                });
 
-            //try
-            //{
-            //    int x = 0, y = 3;
-            //    int z = y / x;
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, ex.Message);
-            //}
-            return View(items);
+                var pagedItems = _itemService.GetItems().ToPagedList(pageNumber, pageSize);
+
+                return View(pagedItems);
+            }
+            catch
+            {
+                  return View("Error");
+            }
         }
+
+
 
         public IActionResult Privacy()
         {
