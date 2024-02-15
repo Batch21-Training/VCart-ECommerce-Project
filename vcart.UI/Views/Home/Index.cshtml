@@ -1,4 +1,6 @@
-﻿@model IEnumerable<vcart.Models.ItemModel>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -24,7 +26,18 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("ProductMenu")
+@await Component.InvokeAsync("ProductMenu", new { pageNumber = Model.PageNumber, pageSize = Model.PageSize })
+
+@* @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.PageSize })) *@
+
+
+
+
+
+
+
+
+
 
 @*<div class="row mt-5">
     @foreach (var item in Model)
